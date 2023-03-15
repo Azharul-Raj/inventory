@@ -9,7 +9,7 @@ const connectDB=async()=>{
             useCreateIndex:true,
             useFindAndModify:true
         })
-        console.log("database connected".yellow.underline);
+        console.log("database connected".brightGreen.italic);
     } catch (error) {
         console.log(error);
     }
