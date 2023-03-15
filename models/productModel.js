@@ -22,7 +22,7 @@ const productSchema=new mongoose.Schema({
         type:String,
         required:[true,"Unit is required"],
         enum:{
-            values:["kg,liter,pcs"],
+            values:["kg","liter","pcs"],
             message:"Unit should be is kg/liter/pcs"
         }
     },
@@ -30,10 +30,13 @@ const productSchema=new mongoose.Schema({
         type:Number,
         required:[true,"Please provide product quantity"],
         min:[0,"Quantity can't be a negative number."],
+        max:1000,
         validate:{
             validator:(value)=>{
                 const isInt=Number.isInteger(value);
-                if(isInt) true;
+                if(isInt){
+                    return true;
+                }
                 return false;
             },
         },
