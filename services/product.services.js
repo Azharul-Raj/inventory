@@ -18,6 +18,13 @@ module.exports.createProductService=async(data)=>{
 
 // update a product service
 module.exports.updateAProductService=async(filter,updateInfo)=>{
-    const result=await Product.findOneAndUpdate({_id:filter},{$set:updateInfo},{new:true});
+    const result=await Product.findByIdAndUpdate({_id:filter},{$set:updateInfo},{new:true});
+    return result;
+}
+// bulk product update
+module.exports.bulkProductsUpdateService=async(data)=>{
+    const result=await Product.updateMany({_id:data.ids},data.data,{
+        runValidators:true
+    })
     return result;
 }
