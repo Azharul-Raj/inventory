@@ -1,6 +1,6 @@
-const { Product } = require("../models/productModel")
-const { getProductsService, createProductService } = require("../services/product.services")
+const { getProductsService, createProductService, updateAProductService, getAProductService } = require("../services/product.services")
 
+// get all products controller
 module.exports.getProduct=async(req,res)=>{
     try {        
         const products=await getProductsService();
@@ -13,7 +13,20 @@ module.exports.getProduct=async(req,res)=>{
         res.send(error.message)
     }
 }
-
+// get a product controller
+module.exports.getAProduct=async(req,res)=>{
+    const {id}=req.params;
+    try {
+        const product=await getAProductService(id);
+        res.status(200).json({
+            success:true,
+            product
+        })
+    } catch (error) {
+        res.send(error.message);
+    }
+}
+// create product controller
 module.exports.createProduct=async(req,res)=>{
     try {        
         const product=await createProductService(req.body);
@@ -23,5 +36,20 @@ module.exports.createProduct=async(req,res)=>{
         })
     } catch (error) {
         res.send(error.message)
+    }
+}
+
+// update a product controller
+module.exports.updateAProduct=async(req,res)=>{
+    const {id}=req.params;
+    const info=req.body;
+    try {
+        const result=await updateAProductService(id,info);
+        res.status(200).json({
+            success:true,
+            result
+        })
+    } catch (error) {
+        res.send(error.message);
     }
 }

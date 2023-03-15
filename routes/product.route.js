@@ -5,6 +5,10 @@ const router=express.Router();
 
 router.route("/")
 .get(productController.getProduct)
-.post(productController.createProduct)
+.post(productController.createProduct);
+
+router.route("/:id")
+.get(productController.getAProduct)
+.patch(productController.updateAProduct)
 
 module.exports=router;
