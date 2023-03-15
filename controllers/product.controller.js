@@ -1,4 +1,4 @@
-const { getProductsService, createProductService, updateAProductService, getAProductService, bulkProductsUpdateService } = require("../services/product.services")
+const { getProductsService, createProductService, updateAProductService, getAProductService, bulkProductsUpdateService, deleteAProductService, bulkProductsDeleteService } = require("../services/product.services")
 
 // get all products controller
 module.exports.getProduct=async(req,res)=>{
@@ -58,5 +58,33 @@ module.exports.updateAProduct=async(req,res)=>{
         })
     } catch (error) {
         res.send(error.message);
+    }
+}
+// delete a product
+module.exports.deleteAProduct=async(req,res)=>{
+    const {id}=req.params;
+    try {
+        const result=await deleteAProductService(id);
+        res.status(200).json({
+            success:true,
+            result
+        })
+    } catch (error) {
+        res.send(error.message);
+    }
+}
+// bulk delete products
+module.exports.bulkDeleteProducts=async(req,res)=>{
+    try {
+        const result=await bulkProductsDeleteService(req.body.ids);
+        res.status(200).json({
+            success:true,
+            result
+        })
+    } catch (error) {
+        res.json({
+            success:false,
+            error:error.message
+        })
     }
 }

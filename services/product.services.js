@@ -23,8 +23,24 @@ module.exports.updateAProductService=async(filter,updateInfo)=>{
 }
 // bulk product update
 module.exports.bulkProductsUpdateService=async(data)=>{
-    const result=await Product.updateMany({_id:data.ids},data.data,{
-        runValidators:true
+    // const result=await Product.updateMany({_id:data.ids},data.data,{
+    //     runValidators:true
+    // })
+    const products=[];
+    data.ids.forEach(productId=>{
+        products.push(Product.updateOne({_id:productId},data.data))
     })
+    const result=await Promise.all(products);
+    return result;
+}
+
+// delete a product
+module.exports.deleteAProductService=async(productId)=>{
+    const result=await Product.deleteOne({_id:productId});
+    return result;
+}
+// bulk delete
+module.exports.bulkProductsDeleteService=async(ids)=>{
+    const result=await Product.deleteMany({_id:ids});
     return result;
 }
