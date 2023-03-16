@@ -2,6 +2,12 @@ const { getProductsService, createProductService, updateAProductService, getAPro
 
 // get all products controller
 module.exports.getProduct=async(req,res)=>{
+    const query={...req.query};
+    console.log(query);
+    if(!query.sortby){
+        query.sortby={}
+    }
+    // if(!query.)
     try {        
         const products=await getProductsService();
         res.status(200).json({

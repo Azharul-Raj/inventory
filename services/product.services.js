@@ -1,8 +1,8 @@
 const { Product } = require("../models/productModel");
 
 // get products services
-module.exports.getProductsService=async()=>{
-    const products=await Product.find({}).select({__v:0});
+module.exports.getProductsService=async(sortBy)=>{
+    const products=await Product.find({status:"in-stock"}).sort(sortBy).select({__v:0});
     return products;
 }
 // get a product service
