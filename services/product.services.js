@@ -1,12 +1,13 @@
-const { Product } = require("../models/productModel");
+const { Product } = require("../models/product.model");
 
 // get products services
-module.exports.getProductsService = async (filter,queryObject) => {
-    console.log(queryObject.sortBy);
+module.exports.getProductsService = async (filter, queryObject) => {
+  console.log(queryObject);
   const products = await Product.find(filter)
-    .sort(queryObject.sortBy)
-    .select({ __v: 0 })
-    .limit(queryObject.limit);
+    .skip(queryObject.skip)
+    .limit(queryObject.limit)
+    // .select({ __v: 0 })
+    .sort(queryObject.sortBy);
   return products;
 };
 // get a product service
