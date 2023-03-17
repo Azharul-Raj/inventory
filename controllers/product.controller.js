@@ -2,14 +2,28 @@ const { getProductsService, createProductService, updateAProductService, getAPro
 
 // get all products controller
 module.exports.getProduct=async(req,res)=>{
-    const query={...req.query};
-    console.log(query);
-    if(!query.sortby){
-        query.sortby={}
+    let filter={...req.query};
+    // excluding other fields
+    const excludeFields=["sort","filter","limit"];
+    excludeFields.map(field=>delete filter[field]);
+    /*--sort by price and--
+    NOTE:In order to replace data with something we need to convert this item to string with JSON.stringify
+    */
+   const filterString=JSON.stringify(filter).replace(/\b(gt|gte|lt|lte)\b/g,isMatch=>`$${isMatch}`);
+   
+    filter=JSON.parse(filterString);
+    console.log(filter);
+    // console.log(replaced);
+    const queryObject={};
+    if(filter?.sort){
+        const sortBy=filter.sort.split(",").join(" ");
+        queryObject.sortBy=sortBy;
     }
-    // if(!query.)
+    if(filter?.limit){
+        queryObject.limit=parseInt(filter.limit);
+    }
     try {        
-        const products=await getProductsService();
+        const products=await getProductsService(filter,queryObject);
         res.status(200).json({
             success:true,
             count:products.length,
