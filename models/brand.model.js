@@ -1,4 +1,6 @@
 const mongoose=require("mongoose");
+const validator=require("validator")
+const {ObjectId}=mongoose.Schema.Types;
 
 const brandSchema=new mongoose.Schema({
     name:{
@@ -14,29 +16,31 @@ const brandSchema=new mongoose.Schema({
     },
     email:{
         type:String,
-        required:true
+        validate:[validator.isEmail,"Please provide a valid email"]
     },
     website:{
         type:String,
-        required:true
+        validate:[validator.isURL,"Please provide a an URL"]
     },
     location:{
         type:String,
-        required:true
     },
+    products:[{
+        type:ObjectId,
+        ref:"Product"
+    }],
+    supplier:[{
+        name:String,
+        contactNumber:String,
+        id:{
+            type:ObjectId,
+            ref:"Supplier"
+        },        
+    }],
     status:{
         type:String,
-        required:[true,"Product status is required"],
-        enum:{
-            values:["in-stock","out-of-stock","discontinued"],
-            message:"Product status must be in-stock/out-of-stock/discontinued"
-        },
-    },
-    products:{
-        type:mongoose.Schema.Types.ObjectId
-    },
-    supplier:{
-        type:mongoose.Schema.Types.ObjectId
+        enum:["active","inactive"],
+        default:"active"
     }
 },{
     timestamps:true
