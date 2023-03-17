@@ -2,6 +2,7 @@ const { Product } = require("../models/productModel");
 
 // get products services
 module.exports.getProductsService = async (filter,queryObject) => {
+    console.log(queryObject.sortBy);
   const products = await Product.find(filter)
     .sort(queryObject.sortBy)
     .select({ __v: 0 })
