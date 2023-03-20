@@ -1,9 +1,12 @@
 const mongoose=require("mongoose");
+const validator=require("validator");
+const {ObjectId}=mongoose.Schema.Types;
 
 const productSchema=new mongoose.Schema({
     name:{
         type:String,
         trim:true,
+        lowercase:true,
         required:[true,"You must provide the name."],
         minLength:[3,"Name should be at least 3 characters."],
         maxLength:[100,"Name is too long."],
@@ -13,52 +16,47 @@ const productSchema=new mongoose.Schema({
         type:String,
         required:[true,"Please provide the description"]
     },
-    price:{
-        type:Number,
-        required:[true,"Price should be given"],
-        min:[0,"Price can't be a negative number"],
-    },
+   imageUrls:[{
+    type:String,
+    required:true,
+    // validate function is receiving an array of image url
+    validate:(value)=>{
+        let isValid=true
+        if(!Array.isArray(value)) return false;        
+        value.forEach(url=>{
+            if(!validator.isURL(url)){
+                // if any of the urls is not a valid url it's returning false 
+                isValid=false;
+            }
+        });
+        return isValid;
+    }
+   }],
     unit:{
         type:String,
         required:[true,"Unit is required"],
         enum:{
-            values:["kg","liter","pcs"],
-            message:"Unit should be is kg/liter/pcs"
+            values:["kg","liter","pcs","bag"],
+            message:"Unit can't be {VALUE} it should be in kg/liter/pcs/bag"
         }
     },
-    quantity:{
-        type:Number,
-        required:[true,"Please provide product quantity"],
-        min:[0,"Quantity can't be a negative number."],
-        max:1000,
-        validate:{
-            validator:(value)=>{
-                const isInt=Number.isInteger(value);
-                if(isInt){
-                    return true;
-                }
-                return false;
-            },
-        },
-        message:"Quantity value should be a Integer type."
-    },
-    status:{
+    category:{
         type:String,
-        required:[true,"Product status is required."],
-        enum:{
-            values:["in-stock","out-of-stock","discontinued"],
-            message:"Status should be within in-stock/out-of-stock/discontinued"
-        }
+        required:true
     },
-    categories:[{
+    brand:{
         name:{
             type:String,
             required:true
         },
-        _id:mongoose.Schema.Types.ObjectId
-    }],
+        id:{
+            type:ObjectId,
+            ref:"Brand",
+            required:true
+        }
+    },    
     supplier:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:ObjectId,
         ref:"Supplier"
     }
 },{

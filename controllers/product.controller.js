@@ -24,6 +24,8 @@ module.exports.getProduct = async (req, res) => {
       (isMatch) => `$${isMatch}`
     );
     filter = JSON.parse(filterString);
+    parseInt(filter?.price?.$gt)
+    console.log(typeof filter.price.$gt);
   }
 //   console.log(filter);
   const queryObject = {};
@@ -32,9 +34,10 @@ module.exports.getProduct = async (req, res) => {
     queryObject.sortBy = sortBy;
   }
   if(filter?.page){
-    console.log("from apge");
-    const {page=1,limit=2}=req.query;
-    const skip=parseInt(page-1)*parseInt(limit);
+    // console.log(req.query);
+    let {page=1,limit=2}=req.query;
+    page= parseInt(page)
+    const skip=(page-1)*parseInt(limit);
     queryObject.skip=skip;
   }
   if (filter?.limit) {
@@ -43,6 +46,7 @@ module.exports.getProduct = async (req, res) => {
   // exclude other fields while we are filtering;
   const excludeFields = ["sort", "filter", "limit"];
   excludeFields.forEach((field) => delete filter[field]);
+  console.log(filter);
   try {
     const products = await getProductsService(filter, queryObject);
     res.status(200).json({

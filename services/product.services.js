@@ -2,12 +2,12 @@ const { Product } = require("../models/product.model");
 
 // get products services
 module.exports.getProductsService = async (filter, queryObject) => {
-  console.log(queryObject);
   const products = await Product.find(filter)
-    .skip(queryObject.skip)
-    .limit(queryObject.limit)
-    // .select({ __v: 0 })
-    .sort(queryObject.sortBy);
+    // .skip(0)
+    // .limit(queryObject.limit)
+    // // .select({ __v: 0 })
+    // .sort(queryObject.sortBy);
+    // console.log(products)
   return products;
 };
 // get a product service
