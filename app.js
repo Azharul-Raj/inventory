@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const productRoutes=require("./routes/product.route");
 const brandRoutes=require("./routes/brand.route");
+const storeRoutes=require("./routes/store.route");
 
 
 app.use(express.json());
@@ -14,7 +15,8 @@ app.get("/", (req, res) => {
   res.send("Route is working! YaY!");
 });
 
-app.use('/api/v1/product',productRoutes)
-app.use('/api/v1/brand',brandRoutes)
+app.use('/api/v1/product',productRoutes);
+app.use('/api/v1/brand',brandRoutes);
+app.use('/api/v1/store',storeRoutes);
 
 module.exports = app;
