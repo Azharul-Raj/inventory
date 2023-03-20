@@ -5,6 +5,11 @@ const router=express.Router();
 
 router.route('/')
 .get(brandController.getBrands)
-.post()
+.post(brandController.createBrand);
 
-exports=router;
+// using id
+router.route("/:id")
+.get(brandController.getBrandById)
+.patch(brandController.updateBrandById)
+
+module.exports=router;

@@ -39,12 +39,14 @@ const brandSchema=new mongoose.Schema({
     }],
     status:{
         type:String,
-        enum:["active","inactive"],
-        default:"active"
+        enum:{
+            values:["active","inactive"],
+            default:"active",
+            message:"{VALUE} isn't assignable to status.{VALUE} should be active/inactive"
+        },
     }
 },{
     timestamps:true
 })
 
-const Brand=mongoose.model("Brand",brandSchema);
-module.exports=Brand;
+module.exports.Brand=mongoose.model("Brand",brandSchema);
