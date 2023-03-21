@@ -19,19 +19,28 @@ const productSchema=new mongoose.Schema({
    imageUrls:[{
     type:String,
     required:true,
-    // validate function is receiving an array of image url
     validate:(value)=>{
-        let isValid=true
-        if(!Array.isArray(value)) return false;        
-        value.forEach(url=>{
-            if(!validator.isURL(url)){
-                // if any of the urls is not a valid url it's returning false 
-                isValid=false;
-            }
-        });
-        return isValid;
+        validator.isURL(value)
     }
-   }],
+    // validate function is receiving an array of image url
+//     validate:{
+//         validator:(value)=>{
+//         let isValid=true
+//         if(!Array.isArray(value)){
+//             return false
+//         } ;        
+//         value.forEach(url=>{
+//             if(!validator.isURL(url)){
+//                 // if any of the urls is not a valid url it's returning false 
+//                 isValid=false;
+//             }
+//         });
+//         console.log(isValid);
+//         return isValid;
+//     },
+//     message:"Please provide a valid url"
+//    }
+}],
     unit:{
         type:String,
         required:[true,"Unit is required"],
