@@ -9,6 +9,7 @@ router.route("/")
 // dynamic route
 router.route("/:id")
 .get(categoryController.getCategoryById)
-.patch(categoryController.updateCategoryById);
+.patch(categoryController.updateCategoryById)
+.delete(categoryController.deleteCategoryById);
 
 module.exports=router;

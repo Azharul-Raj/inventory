@@ -1,4 +1,4 @@
-const { updateSupplierByIdService, getSupplierByIdService, createSupplierService, getSupplierService } = require("../services/supplier.services");
+const { updateSupplierByIdService, getSupplierByIdService, createSupplierService, getSupplierService, deleteSupplierByIdService } = require("../services/supplier.services");
 
 exports.getSuppliers = async (req, res) => {
     try {
@@ -64,3 +64,19 @@ exports.getSuppliers = async (req, res) => {
       });
     }
   };
+  // delete a supplier
+  exports.deleteSupplierById=async(req,res)=>{
+    try {
+      const {id}=req.params;
+      const result=await deleteSupplierByIdService(id);
+      res.status(200).json({
+        success: true,
+        result,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  }

@@ -19,3 +19,8 @@ exports.updateBrandByIdService=async(id,data)=>{
     const result=await Brand.findByIdAndUpdate(id,{$set:data});
     return result;
 }
+// delete brand by id
+exports.deleteBrandByIdService=async(id)=>{
+    const result=await Brand.findByIdAndDelete({_id:id});
+    return result;
+}

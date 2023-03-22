@@ -16,7 +16,7 @@ const storeSchema=new mongoose.Schema({
     description:String,   
     imageUrl:{
         type:String,
-        validate:[validator.isURL,"Please provide a valid Url"]
+        // validate:[validator.isURL,"Please provide a valid Url"]
     },
     status:{
         type:String,

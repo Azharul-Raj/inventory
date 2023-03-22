@@ -9,6 +9,7 @@ router.route("/")
 // dynamic route
 router.route("/:id")
 .get(stockController.getStockById)
-.patch(stockController.updateStockById);
+.patch(stockController.updateStockById)
+.delete(stockController.deleteStockById);
 
 module.exports=router;

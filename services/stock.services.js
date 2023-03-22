@@ -19,3 +19,8 @@ exports.updateStockByIdService=async(id,data)=>{
     const result=await Stock.findByIdAndUpdate(id,{$set:data});
     return result;
 }
+// delete stock by id
+exports.deleteStockByIdService=async(id)=>{
+    const result=await Stock.findByIdAndDelete({_id:id});
+    return result;
+}

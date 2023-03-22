@@ -6,6 +6,7 @@ const {
   bulkProductsUpdateService,
   deleteAProductService,
   bulkProductsDeleteService,
+  deleteProductByIdService,
 } = require("../services/product.services");
 
 // get all products controller
@@ -133,3 +134,19 @@ module.exports.bulkDeleteProducts = async (req, res) => {
     });
   }
 };
+// delete a product
+exports.deleteProductById=async(req,res)=>{
+  try {
+    const {id}=req.params;
+    const result=await deleteProductByIdService(id);
+    res.status(200).json({
+      success: true,
+      result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}

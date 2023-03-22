@@ -20,3 +20,8 @@ exports.updateUserByIdService=async(id,data)=>{
     const result=await User.findByIdAndUpdate(id,{$set:data});
     return result;
 }
+// delete user by id
+exports.deleteUserByIdService=async(id)=>{
+    const result=await User.findByIdAndDelete({_id:id});
+    return result;
+}

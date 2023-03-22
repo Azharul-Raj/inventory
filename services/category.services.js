@@ -19,3 +19,8 @@ exports.updateCategoryByIdService=async(id,data)=>{
     const result=await Category.findByIdAndUpdate(id,{$set:data});
     return result;
 }
+// delete category by id
+exports.deleteCategoryByIdService=async(id)=>{
+    const result=await Category.findByIdAndDelete({_id:id});
+    return result;
+}

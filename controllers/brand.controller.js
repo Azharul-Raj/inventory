@@ -3,6 +3,7 @@ const {
   createBrandService,
   getBrandByIdService,
   updateBrandByIdService,
+  deleteBrandByIdService,
 } = require("../services/brand.services");
 
 exports.getBrands = async (req, res) => {
@@ -69,3 +70,19 @@ exports.updateBrandById = async (req, res) => {
     });
   }
 };
+// delete a brand
+exports.deleteBrandById=async(req,res)=>{
+  try {
+    const {id}=req.params;
+    const result=await deleteBrandByIdService(id);
+    res.status(200).json({
+      success: true,
+      result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}

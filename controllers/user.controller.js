@@ -1,4 +1,4 @@
-const { getUserService, createUserService, getUserByIdService, updateUserByIdService } = require("../services/user.services");
+const { getUserService, createUserService, getUserByIdService, updateUserByIdService, deleteUserByIdService } = require("../services/user.services");
 
 
 exports.getUsers = async (req, res) => {
@@ -48,7 +48,7 @@ exports.getUsers = async (req, res) => {
       });
     }
   };
-  // update a brand
+  // update a user
   exports.updateUserById = async (req, res) => {
     try {
       const { id } = req.params;
@@ -65,3 +65,19 @@ exports.getUsers = async (req, res) => {
       });
     }
   };
+  // delete a user
+  exports.deleteUserById=async(req,res)=>{
+    try {
+      const {id}=req.params;
+      const result=await deleteUserByIdService(id);
+      res.status(200).json({
+        success: true,
+        result,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  }

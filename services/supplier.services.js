@@ -19,3 +19,8 @@ exports.updateSupplierByIdService=async(id,data)=>{
     const result=await Supplier.findByIdAndUpdate(id,{$set:data});
     return result;
 }
+// delete supplier by id
+exports.deleteSupplierByIdService=async(id)=>{
+    const result=await Supplier.findByIdAndDelete({_id:id});
+    return result;
+}

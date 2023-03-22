@@ -3,6 +3,7 @@ const {
     createStoreService,
     getStoreByIdService,
     updateStoreByIdService,
+    deleteStoreByIdService,
   } = require("../services/store.services");
   
   exports.getStores = async (req, res) => {
@@ -69,3 +70,19 @@ const {
       });
     }
   };
+  // delete a store
+  exports.deleteStoreById=async(req,res)=>{
+    try {
+      const {id}=req.params;
+      const result=await deleteStoreByIdService(id);
+      res.status(200).json({
+        success: true,
+        result,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  }

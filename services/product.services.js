@@ -56,3 +56,8 @@ module.exports.bulkProductsDeleteService = async (ids) => {
   const result = await Product.deleteMany({ _id: ids });
   return result;
 };
+// delete product by id
+exports.deleteProductByIdService=async(id)=>{
+  const result=await Product.findByIdAndDelete({_id:id});
+  return result;
+}

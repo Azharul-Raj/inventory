@@ -9,7 +9,8 @@ router.route("/")
 // dynamic data getting and updating
 router.route("/:id")
 .get(storeController.getStoreById)
-.patch(storeController.updateStoreById);
+.patch(storeController.updateStoreById)
+.delete(storeController.deleteStoreById);
 
 
 module.exports=router;
