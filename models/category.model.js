@@ -4,7 +4,7 @@ const validator=require("validator")
 const categorySchema=new mongoose.Schema({
     name:{
         type:String,
-        required:[true,"Please provide a brand name"],  
+        required:[true,"Please provide a category name"],  
         trim:true,
         lowercase:true,
         unique:true,

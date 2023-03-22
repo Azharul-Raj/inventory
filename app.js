@@ -6,6 +6,7 @@ const brandRoutes=require("./routes/brand.route");
 const storeRoutes=require("./routes/store.route");
 const categoryRoutes=require("./routes/category.route");
 const stockRoutes=require("./routes/stock.route");
+const supplierRoutes=require("./routes/supplier.route");
 
 
 app.use(express.json());
@@ -22,5 +23,6 @@ app.use('/api/v1/brand',brandRoutes);
 app.use('/api/v1/store',storeRoutes);
 app.use('/api/v1/category',categoryRoutes);
 app.use('/api/v1/stock',stockRoutes);
+app.use('/api/v1/supplier',supplierRoutes);
 
 module.exports = app;
