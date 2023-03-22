@@ -1,4 +1,4 @@
-const { Store } = require("../models/brand.model");
+const { Store } = require("../models/store.model");
 
 exports.getStoreService=async()=>{    
     const brands=await Store.find({})

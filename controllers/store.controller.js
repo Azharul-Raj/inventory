@@ -3,7 +3,7 @@ const {
     createStoreService,
     getStoreByIdService,
     updateStoreByIdService,
-  } = require("../services/brand.services");
+  } = require("../services/store.services");
   
   exports.getStores = async (req, res) => {
     try {

@@ -4,7 +4,7 @@ const storeController=require("../controllers/store.controller");
 const router=express.Router();
 
 router.route("/")
-.get(storeController.createStore)
+.get(storeController.getStores)
 .post(storeController.createStore);
 // dynamic data getting and updating
 router.route("/:id")

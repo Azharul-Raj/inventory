@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const { ObjectId } = mongoose.Schema.Types;
 
-const stockSchema = new mongoose.Schema(
+const supplierSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -30,16 +30,16 @@ const stockSchema = new mongoose.Schema(
             message:"Type should be is contact number formate."
         }
     },
-    emergencyContactNumber:{
-        type:String,
-        required:[true,"Please provide a contact number"],
-        validate:{
-            validator:(value)=>{
-                return validator.isMobilePhone(value);
-            },
-            message:"Type should be is contact number formate."
-        }
-    },
+    // emergencyContactNumber:{
+    //     type:String,
+    //     required:[true,"Please provide a contact number"],
+    //     validate:{
+    //         validator:(value)=>{
+    //             return validator.isMobilePhone(value);
+    //         },
+    //         message:"Type should be is contact number formate."
+    //     }
+    // },
     tradeLicense:{
         type:String,
         required:[true,"Please provide your license number."]
@@ -102,4 +102,4 @@ const stockSchema = new mongoose.Schema(
   }
 );
 
-module.exports.Stock = mongoose.model("Stock", stockSchema);
+module.exports.Supplier = mongoose.model("Supplier", supplierSchema);

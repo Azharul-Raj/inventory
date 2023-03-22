@@ -1,20 +1,20 @@
 const { Stock } = require("../models/stock.model");
 
 exports.getStockService=async()=>{    
-    const brands=await Stock.find({})
-    return brands;
+    const stocks=await Stock.find({})
+    return stocks;
 }
-// create brand service
-exports.createBrandService=async(data)=>{
+// create stock service
+exports.createStockService=async(data)=>{
     const result=await Stock.create(data);
     return result;
 }
-// get a brand
+// get a stock
 exports.getStockByIdService=async(id)=>{
-    const brand=await Stock.findById(id);
-    return brand;
+    const stock=await Stock.findById(id);
+    return stock;
 }
-// update brand by id
+// update stock by id
 exports.updateStockByIdService=async(id,data)=>{
     const result=await Stock.findByIdAndUpdate(id,{$set:data});
     return result;

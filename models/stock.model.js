@@ -16,7 +16,6 @@ const stockSchema = new mongoose.Schema(
       required: [true, "You must provide the name."],
       minLength: [3, "Name should be at least 3 characters."],
       maxLength: [100, "Name is too long."],
-      unique: [true, "Name must be unique"],
     },
     description: {
       type: String,
@@ -97,6 +96,11 @@ const stockSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
+    },
+    sellCount:{
+      type:Number,
+      default:0,
+      min:0
     },
     brand: {
       name: {
