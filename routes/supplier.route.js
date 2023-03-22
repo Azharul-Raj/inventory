@@ -9,7 +9,8 @@ router.route("/")
 // dynamic supplier
 router.route("/:id")
 .get(supplierController.getSupplierById)
-.patch(supplierController.updateSupplierById);
+.patch(supplierController.updateSupplierById)
+.delete(supplierController.deleteSupplierById);
 
 
 
