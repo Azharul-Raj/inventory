@@ -7,6 +7,7 @@ const {
   deleteAProductService,
   bulkProductsDeleteService,
   deleteProductByIdService,
+  deleteManyProductByIdService,
 } = require("../services/product.services");
 
 // get all products controller
@@ -47,7 +48,6 @@ module.exports.getProduct = async (req, res) => {
   // exclude other fields while we are filtering;
   const excludeFields = ["sort", "filter", "limit"];
   excludeFields.forEach((field) => delete filter[field]);
-  console.log(filter);
   try {
     const products = await getProductsService(filter, queryObject);
     res.status(200).json({
@@ -139,6 +139,22 @@ exports.deleteProductById=async(req,res)=>{
   try {
     const {id}=req.params;
     const result=await deleteProductByIdService(id);
+    res.status(200).json({
+      success: true,
+      result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+// delete many products by id
+exports.bulkDeleteProductsById=async(req,res)=>{
+  try {
+    const {ids}=req.body;
+    const result=await deleteManyProductByIdService(ids);
     res.status(200).json({
       success: true,
       result,

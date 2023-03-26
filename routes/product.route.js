@@ -5,7 +5,8 @@ const router=express.Router();
 
 router.route("/")
 .get(productController.getProduct)
-.post(productController.createProduct);
+.post(productController.createProduct)
+.delete(productController.bulkDeleteProductsById);
 // bulk update route
 router.route("/bulk-update")
 .patch(productController.bulkProductUpdate);
